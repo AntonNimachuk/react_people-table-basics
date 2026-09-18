@@ -17,14 +17,20 @@ export const App = () => (
           <NavLink
             to="/"
             end
-            className={({ isActive }) => classNames("navbar-item", {"is-active" : isActive})}
+            className={({ isActive }) =>
+              classNames('navbar-item', { 'is-active': isActive })
+            }
           >
             Home
           </NavLink>
 
           <NavLink
             to="/people"
-            className={({ isActive }) => classNames("navbar-item has-background-grey-lighter", {"isActive" : isActive})}
+            className={({ isActive }) =>
+              classNames('navbar-item has-background-grey-lighter', {
+                isActive: isActive,
+              })
+            }
           >
             People
           </NavLink>

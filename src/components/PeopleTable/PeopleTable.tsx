@@ -1,4 +1,5 @@
 import { Person } from '../../types';
+import { PersonLink } from './../PersonLink';
 
 type Props = {
   people : Person[];
@@ -12,17 +13,26 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          {people.map(person => (
-            <th>person.name</th>
-          ))}
+          <th>Name</th>
+          <th>Sex</th>
+          <th>Born</th>
+          <th>Died</th>
+          <th>Mother</th>
+          <th>Father</th>
         </tr>
       </thead>
       <tbody> 
-        <tr>
-          {people.map(person => (
-      
-          ))}
-        </tr>
+        {people.map(person => (
+          <tr key={person.slug} data-cy="person">
+            <td><PersonLink person={person} /></td>
+            <td>{person.name}</td>
+            <td>{person.sex}</td>
+            <td>{person.born}</td>
+            <td>{person.died}</td>
+            <td>{person.motherName || '-'}</td>
+            <td>{person.fatherName || '-'}</td>
+          </tr> 
+        ))}
       </tbody>
     </table>
   )

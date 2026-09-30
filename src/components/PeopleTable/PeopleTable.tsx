@@ -1,11 +1,13 @@
 import { Person } from '../../types';
 import { PersonLink } from './../PersonLink';
+import classNames from 'classnames';
 
 type Props = {
   people: Person[];
+  slug?: string;
 };
 
-export const PeopleTable: React.FC<Props> = ({ people }) => {
+export const PeopleTable: React.FC<Props> = ({ people, slug }) => {
   return (
     <table
       data-cy="peopleTable"
@@ -27,19 +29,24 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
           const father= people.find(p => p.name === person.fatherName);
 
           return(
-            <tr key={person.slug} data-cy="person">
+            <tr 
+              key={person.slug} 
+              data-cy="person"
+              className={classNames({
+                "has-background-warning" : slug === person.slug,
+              })}
+            >
               <td>
                 <PersonLink person={person} />
               </td>
-              <td>{person.name}</td>
               <td>{person.sex}</td>
               <td>{person.born}</td>
               <td>{person.died}</td>
-              <td>{mother ? (<PersonLink person={person}/>) : (person.motherName || '-')}</td>
-              <td>{father ? (<PersonLink person={person}/>) : (person.fatherName || '-')}</td>
+              <td>{mother ? (<PersonLink person={mother}/>) : (person.motherName || '-')}</td>
+              <td>{father ? (<PersonLink person={father}/>) : (person.fatherName || '-')}</td>
             </tr>
           )
-        })};
+        })}
       </tbody>
     </table>
   );

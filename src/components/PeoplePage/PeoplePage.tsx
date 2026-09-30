@@ -5,7 +5,6 @@ import { Person } from '../../types/Person';
 import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable';
 
-
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -13,14 +12,14 @@ export const PeoplePage = () => {
 
   const { slug } = useParams();
 
-  useEffect(()=>{
+  useEffect(() => {
     const loadPeople = async () => {
       try {
         const loadedPeople = await getPeople();
 
         setPeople(loadedPeople);
       } catch {
-          setHasError(true);
+        setHasError(true);
       } finally {
         setIsLoading(false);
       }
@@ -41,9 +40,7 @@ export const PeoplePage = () => {
             </p>
           )}
           {!isLoading && !hasError && people.length === 0 && (
-            <p data-cy="noPeopleMessage">
-              There are no people on the server
-            </p>
+            <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
           {!isLoading && !hasError && people.length > 0 && (
             <PeopleTable people={people} slug={slug} />
@@ -52,4 +49,4 @@ export const PeoplePage = () => {
       </div>
     </>
   );
-}
+};
